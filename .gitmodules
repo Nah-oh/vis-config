@@ -1,0 +1,3 @@
+[submodule "plugins/vis-autoclose"]
+	path = plugins/vis-autoclose
+	url = https://codeberg.org/luxanna/vis-autoclose.git
