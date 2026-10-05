@@ -12,10 +12,21 @@ vis.events.subscribe(vis.events.WIN_OPEN, function(win) -- luacheck: no unused a
 	vis:command('set tabwidth 2')
 	vis:command('set number')
 	vis:command('set relativenumber')
+	vis:map(vis.modes.NORMAL, " d", function()
+		end
+	)
 	vis:map(vis.modes.NORMAL, " e", function()
 		vis:command(":e .")
 		end
 	)
+	for m in ipairs({vis.modes.VISUAL, vis.modes.VISUAL_LINE}) do
+		vis:map(m, " y", function()
+			local range = win.selection.range
+			local selected = win.file:content(range)
+			io.popen("echo '" .. selected .. "' | wl-copy")
+			end
+		)
+	end
 end)
 
 local fetcher = require('loader')
